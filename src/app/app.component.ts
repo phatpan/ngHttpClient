@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {UserResponse} from './user-response';
 @Component({
   selector: 'app-root',
@@ -14,6 +14,12 @@ export class AppComponent implements OnInit{
       console.log("User Login: " + data.login);
       console.log("Bio: " + data.bio);
       console.log("Company: " + data.company);
+    },(err:HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        console.log("Client-side error occured.");
+      } else {
+        console.log("Server-side error occured.");
+      }
     });
   }
 }
